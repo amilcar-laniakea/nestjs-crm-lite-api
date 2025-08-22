@@ -31,6 +31,56 @@
 $ npm install
 ```
 
+## Code Quality & Git Hooks
+
+This project uses **Husky** and **lint-staged** to ensure code quality before commits.
+
+### Automatic Code Quality Checks
+
+Every time you commit code, the following checks run automatically:
+
+- **ESLint**: Checks and fixes TypeScript code issues
+- **Prettier**: Formats code according to project standards
+- **Commitlint**: Ensures commit messages follow conventional commit format
+
+### Manual Commands
+
+```bash
+# Lint and fix code issues
+$ npm run lint
+
+# Check linting without fixing
+$ npm run lint:check
+
+# Format code with Prettier
+$ npm run format
+
+# Check formatting without fixing
+$ npm run format:check
+```
+
+### Commit Message Format
+
+This project follows [Conventional Commits](https://www.conventionalcommits.org/). Use one of these types:
+
+- `feat:` for new features
+- `fix:` for bug fixes
+- `docs:` for documentation changes
+- `style:` for code style changes
+- `refactor:` for code refactoring
+- `test:` for test changes
+- `chore:` for maintenance tasks
+
+**Example:** `feat: add user authentication module`
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+PORT=4000
+```
+
 ## Compile and run the project
 
 ```bash
