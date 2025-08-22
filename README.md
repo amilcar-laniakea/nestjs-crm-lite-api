@@ -7,6 +7,7 @@
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
+<a href="https://github.com/amilcar-laniakea/nestjs-crm-lite-api/actions/workflows/ci.yml" target="_blank"><img src="https://github.com/amilcar-laniakea/nestjs-crm-lite-api/workflows/CI%2FCD%20Pipeline/badge.svg" alt="CI/CD Pipeline" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
@@ -80,6 +81,30 @@ Create a `.env` file in the root directory:
 ```bash
 PORT=4000
 ```
+
+## CI/CD Pipeline
+
+This project includes a GitHub Actions workflow that automatically runs on every push and pull request to the `master` branch.
+
+### Automated Checks
+
+The CI/CD pipeline performs the following checks:
+
+- ✅ **Lint Check**: Validates code quality using ESLint
+- ✅ **Format Check**: Ensures code formatting with Prettier
+- ✅ **Build Check**: Verifies the project builds successfully
+- ✅ **Tests**: Runs the test suite
+
+### Matrix Testing
+
+The pipeline tests against multiple Node.js versions:
+
+- Node.js 18.x
+- Node.js 20.x
+
+### Workflow Status
+
+You can monitor the status of your builds in the [Actions tab](https://github.com/amilcar-laniakea/nestjs-crm-lite-api/actions) of your repository.
 
 ## Compile and run the project
 
