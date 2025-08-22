@@ -1,8 +1,8 @@
 {
   "name": "nestjs-crm-lite-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "fullstack backend nestjs api",
+  "author": "free to use",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -77,7 +77,7 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "*.{ts,js}": [
+    "*.ts": [
       "eslint --fix",
       "prettier --write"
     ],
