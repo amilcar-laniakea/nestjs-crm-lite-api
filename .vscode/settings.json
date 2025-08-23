@@ -22,5 +22,6 @@
   "explorer.compactFolders": false,
   "files.associations": {
     "*.svg": "html"
-  }
+  },
+  "material-icon-theme.activeIconPack": "nest"
 }

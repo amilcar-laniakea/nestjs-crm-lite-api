@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+  PROSPECT
+  LEAD
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      Role     @default(USER)
+  avatar    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clients Client[] @relation("ClientOwner")
+  notes   Note[]
+
+  @@map("users")
+}
+
+model Client {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  phone       String?
+  company     String?
+  status      ClientStatus @default(PROSPECT)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  ownerId String
+  owner   User   @relation("ClientOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  notes   Note[]
+
+  @@map("clients")
+  @@index([ownerId])
+  @@index([email])
+  @@index([status])
+  @@index([company])
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  content     String
+  image       String?
+  isImportant Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notes")
+  @@index([clientId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("sessions")
+  @@index([userId])
+  @@index([token])
+}
