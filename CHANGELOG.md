@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-08-21
+
+### Added
+
+- Prisma database integration with connection lifecycle management
+- Health check endpoint for database connectivity monitoring
+- Development-only guard to restrict health endpoints in production
+- Unit tests for PrismaService with connection validation
+- Authentication DTOs with proper validation decorators and error messages
+- TypeScript strict typing improvements for ESLint compliance
+
+### Changed
+
+- Enhanced PrismaService with proper OnModuleDestroy implementation
+- Improved error handling and type safety across database operations
+- Proper validation implementation without ESLint rule disabling
+
 ## [0.2.0] - 2025-08-21
 
 ### Added

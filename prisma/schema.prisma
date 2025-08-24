@@ -15,16 +15,13 @@ enum Role {
 enum ClientStatus {
   ACTIVE
   INACTIVE
-  PROSPECT
-  LEAD
 }
 
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
-  password  String
-  firstName String
-  lastName  String
+  name      String
+  password  String 
   role      Role     @default(USER)
   avatar    String?
   isActive  Boolean  @default(true)
@@ -43,7 +40,7 @@ model Client {
   email       String       @unique
   phone       String?
   company     String?
-  status      ClientStatus @default(PROSPECT)
+  status      ClientStatus @default(ACTIVE)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
@@ -75,16 +72,4 @@ model Note {
   @@index([clientId])
   @@index([userId])
   @@index([createdAt])
-}
-
-model Session {
-  id        String   @id @default(cuid())
-  userId    String
-  token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-
-  @@map("sessions")
-  @@index([userId])
-  @@index([token])
 }

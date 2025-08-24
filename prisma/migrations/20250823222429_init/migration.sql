@@ -2,15 +2,14 @@
 CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
-CREATE TYPE "public"."ClientStatus" AS ENUM ('ACTIVE', 'INACTIVE', 'PROSPECT', 'LEAD');
+CREATE TYPE "public"."ClientStatus" AS ENUM ('ACTIVE', 'INACTIVE');
 
 -- CreateTable
 CREATE TABLE "public"."users" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
     "role" "public"."Role" NOT NULL DEFAULT 'USER',
     "avatar" TEXT,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
@@ -27,7 +26,7 @@ CREATE TABLE "public"."clients" (
     "email" TEXT NOT NULL,
     "phone" TEXT,
     "company" TEXT,
-    "status" "public"."ClientStatus" NOT NULL DEFAULT 'PROSPECT',
+    "status" "public"."ClientStatus" NOT NULL DEFAULT 'ACTIVE',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "ownerId" TEXT NOT NULL,
@@ -47,17 +46,6 @@ CREATE TABLE "public"."notes" (
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "notes_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "public"."sessions" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
-    "expiresAt" TIMESTAMP(3) NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "sessions_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -86,15 +74,6 @@ CREATE INDEX "notes_userId_idx" ON "public"."notes"("userId");
 
 -- CreateIndex
 CREATE INDEX "notes_createdAt_idx" ON "public"."notes"("createdAt");
-
--- CreateIndex
-CREATE UNIQUE INDEX "sessions_token_key" ON "public"."sessions"("token");
-
--- CreateIndex
-CREATE INDEX "sessions_userId_idx" ON "public"."sessions"("userId");
-
--- CreateIndex
-CREATE INDEX "sessions_token_idx" ON "public"."sessions"("token");
 
 -- AddForeignKey
 ALTER TABLE "public"."clients" ADD CONSTRAINT "clients_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "public"."users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
