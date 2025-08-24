@@ -1,30 +1,460 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS CRM Lite API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![CI/CD Pipeline](https://github.com/amilcar-laniakea/nestjs-crm-lite-api/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/amilcar-laniakea/nestjs-crm-lite-api/actions/workflows/ci.yml)
+[![NestJS](https://img.shields.io/badge/NestJS-10.x-red.svg)](https://nestjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.x-blue.svg)](https://prisma.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue.svg)](https://www.postgresql.org/)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://github.com/amilcar-laniakea/nestjs-crm-lite-api/actions/workflows/ci.yml" target="_blank"><img src="https://github.com/amilcar-laniakea/nestjs-crm-lite-api/workflows/CI%2FCD%20Pipeline/badge.svg" alt="CI/CD Pipeline" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A comprehensive CRM Lite API built with NestJS, Prisma, and PostgreSQL. This application provides a complete backend solution for managing clients and notes with JWT authentication, role-based access control, and comprehensive API documentation.
 
-## Description
+## ✨ Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 🔐 **JWT Authentication** - Secure user authentication and authorization
+- 👥 **User Management** - User registration, login, and profile management
+- 🏢 **Client Management** - Complete CRUD operations for clients
+- 📝 **Notes System** - Notes associated with clients and users
+- 🔍 **Advanced Filtering** - Pagination, search, and filtering capabilities
+- 📚 **Swagger Documentation** - Complete API documentation with examples
+- 🗄️ **Database Integration** - Prisma ORM with PostgreSQL
+- 🛡️ **Role-based Access** - Admin and user role management
+- ✅ **Input Validation** - Class-validator decorators for data validation
+- 🧪 **Testing Ready** - Jest configuration for unit and e2e tests
+- 📋 **Code Quality** - ESLint, Prettier, and Husky pre-commit hooks
+
+## 📁 Project Structure
+
+```
+nestjs-crm-lite-api/
+├── src/
+│   ├── auth/                    # Authentication module
+│   │   ├── dto/                 # Auth DTOs (login, register)
+│   │   ├── auth.controller.ts   # Auth endpoints
+│   │   ├── auth.service.ts      # Auth business logic
+│   │   └── auth.module.ts       # Auth module definition
+│   ├── clients/                 # Client management module
+│   │   ├── dto/                 # Client DTOs (create, update, find)
+│   │   ├── clients.controller.ts # Client endpoints
+│   │   ├── clients.service.ts   # Client business logic
+│   │   └── clients.module.ts    # Client module definition
+│   ├── notes/                   # Notes management module
+│   │   ├── dto/                 # Note DTOs (create, update, find)
+│   │   ├── notes.controller.ts  # Note endpoints
+│   │   ├── notes.service.ts     # Note business logic
+│   │   └── notes.module.ts      # Note module definition
+│   ├── users/                   # User management module
+│   │   ├── dto/                 # User DTOs
+│   │   ├── users.service.ts     # User business logic
+│   │   └── users.module.ts      # User module definition
+│   ├── guards/                  # Security guards
+│   │   ├── auth.guard.ts        # JWT authentication guard
+│   │   └── development.guard.ts # Development environment guard
+│   ├── prisma/                  # Database module
+│   │   ├── prisma.service.ts    # Prisma client service
+│   │   └── prisma.module.ts     # Prisma module definition
+│   ├── common/                  # Shared components
+│   │   ├── dto/                 # Common DTOs
+│   │   └── types/               # TypeScript type definitions
+│   ├── health/                  # Health check module
+│   │   └── health.controller.ts # Health endpoints
+│   ├── app.module.ts            # Main application module
+│   └── main.ts                  # Application entry point
+├── prisma/                      # Database schema and migrations
+│   ├── schema.prisma            # Database schema definition
+│   ├── seed.ts                  # Database seeding script
+│   └── migrations/              # Database migrations
+├── test/                        # Test files
+├── .github/                     # GitHub Actions workflows
+├── .husky/                      # Git hooks configuration
+└── docs/                        # Documentation files
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **PostgreSQL** (v15 or higher)
+- **Git**
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/amilcar-laniakea/nestjs-crm-lite-api.git
+cd nestjs-crm-lite-api
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Environment Setup
+
+Create a `.env` file in the root directory:
+
+```env
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/crm_lite_db"
+
+# JWT Configuration
+JWT_SECRET="your-super-secret-jwt-key"
+JWT_EXPIRES_IN="7d"
+
+# Bcrypt Configuration
+BCRYPT_SALT_ROUNDS=10
+
+# Application
+PORT=3000
+NODE_ENV=development
+```
+
+### 4. Database Setup
+
+#### Initialize Prisma
+
+```bash
+# Generate Prisma client
+npx prisma generate
+```
+
+#### Run Database Migrations
+
+```bash
+# Apply all pending migrations
+npx prisma migrate dev --name init
+
+# Or reset database (development only)
+npm run db:reset
+```
+
+#### Seed the Database (Optional)
+
+```bash
+npm run db:seed
+```
+
+### 5. Start the Application
+
+#### Development Mode
+
+```bash
+npm run start:dev
+```
+
+#### Production Mode
+
+```bash
+npm run build
+npm run start:prod
+```
+
+The API will be available at `http://localhost:3000`
+
+## 📖 API Documentation
+
+### Swagger UI
+
+Once the application is running, visit:
+
+- **Swagger UI**: `http://localhost:3000/openapi`
+- **JSON Schema**: `http://localhost:3000/openapi-json`
+
+### Authentication
+
+All endpoints (except auth) require a Bearer token in the Authorization header:
+
+```bash
+Authorization: Bearer <your_jwt_token>
+```
+
+### API Endpoints
+
+#### Authentication
+
+| Method | Endpoint         | Description       | Body                        |
+| ------ | ---------------- | ----------------- | --------------------------- |
+| `POST` | `/auth/register` | Register new user | `{ name, email, password }` |
+| `POST` | `/auth/login`    | User login        | `{ email, password }`       |
+
+#### Clients
+
+| Method   | Endpoint         | Description                 | Auth Required |
+| -------- | ---------------- | --------------------------- | ------------- |
+| `GET`    | `/clients`       | Get all clients (paginated) | ✅            |
+| `POST`   | `/clients`       | Create new client           | ✅            |
+| `GET`    | `/clients/:id`   | Get client by ID            | ✅            |
+| `GET`    | `/clients/email` | Get client by email         | ✅            |
+| `PATCH`  | `/clients/:id`   | Partially update client     | ✅            |
+| `PUT`    | `/clients/:id`   | Fully update client         | ✅            |
+| `DELETE` | `/clients/:id`   | Delete client               | ✅            |
+
+#### Notes
+
+| Method   | Endpoint                     | Description                | Auth Required |
+| -------- | ---------------------------- | -------------------------- | ------------- |
+| `GET`    | `/clients/:id/notes`         | Get all notes (paginated)  | ✅            |
+| `POST`   | `/clients/:id/notes`         | Create new note for client | ✅            |
+| `GET`    | `/clients/:clientId/notes`   | Get notes by client        | ✅            |
+| `PATCH`  | `/clients/:id/notes/:noteId` | Update note                | ✅            |
+| `DELETE` | `/clients/:id/notes/:noteId` | Delete note                | ✅            |
+
+#### Health Check
+
+| Method | Endpoint  | Description               | Auth Required |
+| ------ | --------- | ------------------------- | ------------- |
+| `GET`  | `/health` | Application health status | ❌            |
+
+### Query Parameters
+
+#### Pagination
+
+```bash
+GET /clients?page=1&pageSize=10
+```
+
+#### Filtering
+
+```bash
+GET /clients?name=John&status=ACTIVE&company=ACME
+GET /notes?isImportant=true&content=meeting
+```
+
+## 🗄️ Database Schema
+
+### User Model
+
+```prisma
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(USER)
+  avatar    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clients Client[] @relation("ClientOwner")
+  notes   Note[]
+}
+```
+
+### Client Model
+
+```prisma
+model Client {
+  id        String       @id @default(cuid())
+  name      String
+  email     String       @unique
+  phone     String?
+  company   String?
+  status    ClientStatus @default(ACTIVE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  ownerId String
+  owner   User   @relation("ClientOwner", fields: [ownerId], references: [id])
+  notes   Note[]
+}
+```
+
+### Note Model
+
+```prisma
+model Note {
+  id          String   @id @default(cuid())
+  content     String
+  image       String?
+  isImportant Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+}
+```
+
+## 🔧 Development Commands
+
+### Application
+
+```bash
+# Start development server
+npm run start:dev
+
+# Start debug mode
+npm run start:debug
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start:prod
+```
+
+### Database (Prisma)
+
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Create and apply migration
+npx prisma migrate dev --name migration_name
+
+# Reset database (development only)
+npm run db:reset
+
+# Seed database
+npm run db:seed
+
+# Open Prisma Studio
+npx prisma studio
+
+# Check migration status
+npx prisma migrate status
+
+# Deploy migrations (production)
+npx prisma migrate deploy
+```
+
+### Code Quality
+
+```bash
+# Run ESLint
+npm run lint
+
+# Run ESLint with auto-fix
+npm run lint:fix
+
+# Check code formatting
+npm run format:check
+
+# Format code with Prettier
+npm run format
+
+# Run all tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run e2e tests
+npm run test:e2e
+
+# Generate test coverage
+npm run test:cov
+```
+
+## 🐳 Docker Support
+
+### Using Docker Compose
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+## 🔒 Security Features
+
+- **JWT Authentication** - Secure token-based authentication
+- **Password Hashing** - bcrypt for secure password storage
+- **Role-based Access Control** - Admin and user roles
+- **Input Validation** - class-validator for request validation
+- **CORS Configuration** - Cross-origin request handling
+- **Environment Variables** - Secure configuration management
+
+## 📋 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+
+# Watch mode
+npm run test:watch
+```
+
+## 🚀 Deployment
+
+### Environment Variables
+
+Ensure these environment variables are set in production:
+
+```env
+DATABASE_URL=postgresql://user:password@host:port/database
+JWT_SECRET=your-production-jwt-secret
+JWT_EXPIRES_IN=7d
+BCRYPT_SALT_ROUNDS=12
+PORT=3000
+NODE_ENV=production
+```
+
+### Production Deployment
+
+```bash
+# Build the application
+npm run build
+
+# Run database migrations
+npx prisma migrate deploy
+
+# Start the production server
+npm run start:prod
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat: add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Commit Convention
+
+This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `style:` Code style changes
+- `refactor:` Code refactoring
+- `test:` Test additions or modifications
+- `chore:` Build process or auxiliary tool changes
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Amilcar Barahona**
+
+- GitHub: [@amilcar-laniakea](https://github.com/amilcar-laniakea)
+- Email: amilcar.laniakea@gmail.com
+
+## 🙏 Acknowledgments
+
+- [NestJS](https://nestjs.com/) - The progressive Node.js framework
+- [Prisma](https://prisma.io/) - Next-generation ORM for TypeScript
+- [PostgreSQL](https://www.postgresql.org/) - Advanced open source database
 
 ## Project setup
 
