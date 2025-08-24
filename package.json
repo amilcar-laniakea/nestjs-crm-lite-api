@@ -26,7 +26,8 @@
     "prepare": "husky",
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
