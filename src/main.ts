@@ -18,7 +18,12 @@ async function bootstrap() {
     })
   );
 
-  app.enableCors();
+  app.enableCors({
+    origin: [process.env.BASE_URL],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+  });
 
   const config = new DocumentBuilder()
     .setTitle('CRM Lite API')
@@ -38,7 +43,13 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('openapi', app, document);
+  SwaggerModule.setup('openapi', app, document, {
+    customCssUrl: 'https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css',
+    customJs: [
+      'https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js',
+      'https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js'
+    ]
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
