@@ -24,7 +24,7 @@ export class AuthService {
       throw new BadRequestException('Email already in use');
     }
 
-    const user = await this.usersService.create({
+    return await this.usersService.create({
       email,
       name,
       password: await bcryptjs.hash(
@@ -32,12 +32,6 @@ export class AuthService {
         Number(process.env.BCRYPT_SALT_ROUNDS)
       )
     });
-
-    return {
-      message: 'User has been created successfully',
-      statusCode: 201,
-      data: user
-    };
   }
 
   async login({ email, password }: LoginDto) {

@@ -1,4 +1,24 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateClientDto } from './create-client.dto';
+import { ClientStatus } from '@prisma/client';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
-export class UpdateClientDto extends PartialType(CreateClientDto) {}
+export class UpdateClientDto {
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+
+  @IsNotEmpty()
+  @IsString()
+  company: string;
+
+  @IsNotEmpty()
+  @IsEnum(ClientStatus)
+  status: ClientStatus;
+}
