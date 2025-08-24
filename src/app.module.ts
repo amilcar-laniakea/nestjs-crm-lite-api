@@ -4,9 +4,10 @@ import { ClientsModule } from './clients/clients.module';
 import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
-  imports: [ClientsModule, UsersModule, PrismaModule, AuthModule],
+  imports: [ClientsModule, UsersModule, PrismaModule, AuthModule, NotesModule],
   controllers: [HealthController]
 })
 export class AppModule {}

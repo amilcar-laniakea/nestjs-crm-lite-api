@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 dotenv.config();
 async function bootstrap() {
@@ -16,6 +17,14 @@ async function bootstrap() {
       forbidNonWhitelisted: true
     })
   );
+  const config = new DocumentBuilder()
+    .setTitle('CRM Lite')
+    .setDescription('The CRM Lite API Fullstack')
+    .setVersion('0.1')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('openapi', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }
