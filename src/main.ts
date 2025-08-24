@@ -17,6 +17,9 @@ async function bootstrap() {
       forbidNonWhitelisted: true
     })
   );
+
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('CRM Lite API')
     .setDescription('CRM Lite API for managing clients and notes')
