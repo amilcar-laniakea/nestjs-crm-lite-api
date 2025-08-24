@@ -1,12 +1,13 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { DevelopmentGuard } from '../guards/development.guard';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('health')
 @UseGuards(DevelopmentGuard)
 export class HealthController {
   constructor(private readonly prisma: PrismaService) {}
-
+  @ApiOperation({ summary: 'Health check of the api backend' })
   @Get('db')
   async checkDatabase() {
     try {

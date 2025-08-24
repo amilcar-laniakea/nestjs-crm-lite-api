@@ -18,9 +18,20 @@ async function bootstrap() {
     })
   );
   const config = new DocumentBuilder()
-    .setTitle('CRM Lite')
-    .setDescription('The CRM Lite API Fullstack')
-    .setVersion('0.1')
+    .setTitle('CRM Lite API')
+    .setDescription('CRM Lite API for managing clients and notes')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header'
+      },
+      'JWT-auth'
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
